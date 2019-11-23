@@ -23,14 +23,18 @@ namespace Autenticacion_BD
         public static string Buscar(OleDbConnection conexion, string busqueda)
         {
             
-            string cadena = null;
+            string[] cadena = new string[100];
             OleDbCommand cmd = new OleDbCommand();
             cmd.Connection = conexion;
             cmd.CommandText = "SELECT Usuario FROM Cuentas WHERE usuario like'" + busqueda + "'";
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-               cadena += reader.GetString(0)+"\n\r";
+                //cadena += reader.GetString(0)+"\n\r";
+                for (int i = 0; i < length; i++) //TODO Encontrar la manera de que el ciclo for ingrese cada resultado devuelto por la consulta en un Array
+                {
+
+                }
             }
             reader.Close();
             return cadena;
@@ -38,7 +42,6 @@ namespace Autenticacion_BD
         
         public static void Eliminar(OleDbConnection conexion, string elemento)
         {
-            Boolean bandera = false;
             string delete = "DELETE FROM Cuentas Where usuario='"+elemento+"'";
             OleDbCommand cmd = new OleDbCommand(delete, conexion);
             MessageBox.Show(delete);
