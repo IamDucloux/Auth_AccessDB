@@ -20,7 +20,7 @@ namespace Autenticacion_BD
             InitializeComponent();
         }
 
-        public static string Buscar(OleDbConnection conexion, string busqueda)
+        public static void Buscar(OleDbConnection conexion, string busqueda, ListBox list)
         {
             
             string[] cadena = new string[100];
@@ -30,14 +30,10 @@ namespace Autenticacion_BD
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
-                //cadena += reader.GetString(0)+"\n\r";
-                for (int i = 0; i < length; i++) //TODO Encontrar la manera de que el ciclo for ingrese cada resultado devuelto por la consulta en un Array
-                {
-
-                }
+                list.Items.Add(reader.GetString(0));
             }
             reader.Close();
-            return cadena;
+            
         }
         
         public static void Eliminar(OleDbConnection conexion, string elemento)

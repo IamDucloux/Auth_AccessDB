@@ -20,7 +20,8 @@ namespace Autenticacion_BD
             try
             {
 
-                con.Open(); MessageBox.Show("Conectado");
+                con.Open();
+                //MessageBox.Show("Conectado");
 
 
 
