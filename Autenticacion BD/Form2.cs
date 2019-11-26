@@ -62,7 +62,8 @@ namespace Autenticacion_BD
 
         private void Button3_Click(object sender, EventArgs e)
         {
-
+            listBox1.Items.Clear();
+            Buscar(Form1.Conecta_Bd(), textBox1.Text, listBox1);
         }
 
         private void Button4_Click(object sender, EventArgs e)
@@ -79,6 +80,11 @@ namespace Autenticacion_BD
         private void Form2_Load(object sender, EventArgs e)
         {
             
+        }
+
+        private void Label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
