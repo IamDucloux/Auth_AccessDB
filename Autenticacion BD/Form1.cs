@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.OleDb;
 using System.Windows.Forms;
+using MySql.Data;
 
 namespace Autenticacion_BD
 {
