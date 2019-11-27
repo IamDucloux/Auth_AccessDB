@@ -15,6 +15,7 @@ namespace Autenticacion_BD
     {
         static Form4 alta = new Form4();
         static Form5 baja = new Form5();
+        static Form6 edita = new Form6();
         public Form2()
         {
             InitializeComponent();
@@ -53,6 +54,25 @@ namespace Autenticacion_BD
             
         }
 
+        public static void Editar_BD(OleDbConnection conexion, string usuario, string contraseña, string foto, string nivel, string busqueda)
+        {
+            //int filas = 0;
+            string update = "UPDATE Cuentas SET Usuario ='" + usuario + "'," + "Contraseña='" + contraseña + "'," + "Fotografia='" + foto + "'," + "Nivel='" + nivel + "' "+
+                "WHERE Usuario='"+busqueda+"'";  
+            OleDbCommand cmd = new OleDbCommand(update, conexion);
+            MessageBox.Show(update);
+            cmd.ExecuteNonQuery();
+
+
+            //INSERT INTO cuentas(USUARIO,CONTRASEÑA,FOTOGREAFIA,NIVEL) VALUES('iAN',"123","1","Usuario")
+
+        }
+
+
+        
+
+
+
         private void Button1_Click(object sender, EventArgs e)
         {
             alta = new Form4();
@@ -74,7 +94,8 @@ namespace Autenticacion_BD
 
         private void Button2_Click(object sender, EventArgs e)
         {
-
+            edita = new Form6();
+            edita.Show();
         }
 
         private void Form2_Load(object sender, EventArgs e)

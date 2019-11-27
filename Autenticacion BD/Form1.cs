@@ -35,13 +35,13 @@ namespace Autenticacion_BD
             return con;
         }
 
-        public static String Consulta_Usuario(OleDbConnection conexion, TextBox texb)
+        public static String Consulta_Usuario(OleDbConnection conexion, string texb)
         {
             //conexion.Open();
             string usuario = null;
             OleDbCommand cmd = new OleDbCommand();
             cmd.Connection = conexion;
-            cmd.CommandText = "SELECT Usuario FROM Cuentas WHERE Usuario='" + texb.Text + "'";
+            cmd.CommandText = "SELECT Usuario FROM Cuentas WHERE Usuario='" + texb + "'";
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -54,13 +54,13 @@ namespace Autenticacion_BD
 
         
 
-        public static String Consulta_contraseña(OleDbConnection conexion, TextBox texb)
+        public static String Consulta_contraseña(OleDbConnection conexion, string texb)
         {
             //conexion.Open();
             string cadena = null;
             OleDbCommand cmd = new OleDbCommand();
             cmd.Connection = conexion;
-            cmd.CommandText = "SELECT Contraseña FROM Cuentas WHERE usuario='" + texb.Text + "'";
+            cmd.CommandText = "SELECT Contraseña FROM Cuentas WHERE usuario='" + texb + "'";
             OleDbDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
             {
@@ -86,6 +86,24 @@ namespace Autenticacion_BD
             //conexion.Close();
             return nivel;
         }
+
+        public static string Consulta_Foto(OleDbConnection conexion, string usuario)
+        {
+            string foto = null;
+            OleDbCommand cmd = new OleDbCommand();
+            cmd.Connection = conexion;
+            cmd.CommandText = "SELECT Fotografia FROM Cuentas WHERE usuario='" + usuario + "'";
+            OleDbDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                foto = reader.GetString(0);
+            }
+            reader.Close();
+            //conexion.Close();
+            return foto;
+        }
+
+        
 
         public static Boolean Autenticacion(string usuario, string contraseña, TextBox entr_usr, TextBox entr_contr)
         {
@@ -118,7 +136,7 @@ namespace Autenticacion_BD
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            if (Autenticacion(Consulta_Usuario(Conecta_Bd(), textBox1), Consulta_contraseña(Conecta_Bd(), textBox1), textBox1, textBox2))
+            if (Autenticacion(Consulta_Usuario(Conecta_Bd(), textBox1.Text), Consulta_contraseña(Conecta_Bd(), textBox1.Text), textBox1, textBox2))
             {
                 MessageBox.Show("Correcto");
                 if (Consulta_Nivel(Conecta_Bd(),textBox1.Text)=="Usuario")
